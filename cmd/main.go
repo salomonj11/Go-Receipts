@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+    "sync"
+)
 
-func main() {
-    fmt.Println("Hello World!")
-}
+var (
+    mu = &sync.Mutex{}
+
+    receiptsMap = make(map[int]models.Receipt)
+    nextID = 1
+)
