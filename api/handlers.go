@@ -13,21 +13,26 @@ import (
 var (
     mu          sync.Mutex
     nextID      int
-    receiptsMap = make(map[int]models.Receipt)
+    receiptsMap = make(map[int]struct {
+        Receipt models.Receipt
+        Points  int
+    })
 )
 
-func ProcessReceipt (w http.ResponseWriter, r *http.Request) {
+func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
     var receipt models.Receipt
     if err := json.NewDecoder(r.Body).Decode(&receipt); err != nil {
         http.Error(w, "Bad Request", http.StatusBadRequest)
         return
-    } 
-
-
+    }
 
     mu.Lock()
     currentID := nextID
-    receiptsMap[currentID] = receipt
+    points := CalculatePoints(receipt) 
+    receiptsMap[currentID] = struct {
+        Receipt models.Receipt
+        Points  int
+    }{Receipt: receipt, Points: points}
     nextID++
     mu.Unlock()
 
@@ -49,12 +54,14 @@ func GetReceiptPoints(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    receipt, ok := receiptsMap[id]
+    receiptData, ok := receiptsMap[id]
     if !ok {
         http.Error(w, "Receipt not found", http.StatusNotFound)
         return
     }
 
-    // Placeholder response for now.
-    json.NewEncoder(w).Encode(models.PointsResponse{Points: 0})
+    json.NewEncoder(w).Encode(models.PointsResponse{Points: receiptData.Points})
 }
+
+
+
