@@ -2,6 +2,7 @@ package main
 
 import (
     "sync"
+    "github.com/salomonj11/Go-Receipts/models"
 )
 
 var (
