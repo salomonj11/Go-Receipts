@@ -8,7 +8,7 @@ import (
     "github.com/salomonj11/Go-Receipts/models"
 )
 
-func calculatePoints(receipt models.Receipt) int {
+func CalculatePoints(receipt models.Receipt) int {
     points := 0
 
     // Rule: Retailer name alphanumeric character count

@@ -1,6 +1,5 @@
 package models
 
-import "time"
 
 type Receipt struct {
     Retailer string `json:"retailer"`
