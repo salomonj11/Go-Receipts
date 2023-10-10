@@ -90,19 +90,19 @@ You can use the below example to test the `Process Receipt` endpoint:
         "items": [
         {
             "shortDescription": "Gatorade",
-            "price": "2.25"
+            "price": 2.25
         },{
             "shortDescription": "Gatorade",
-            "price": "2.25"
+            "price": 2.25
         },{
             "shortDescription": "Gatorade",
-            "price": "2.25"
+            "price": 2.25
         },{
             "shortDescription": "Gatorade",
-            "price": "2.25"
+            "price": 2.25
         }
         ],
-        "total": "9.00"
+        "total": 9.00
 }
 ```
 
